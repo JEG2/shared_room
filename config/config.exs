@@ -5,7 +5,7 @@ use Mix.Config
 # Configure the main viewport for the Scenic application
 config :shared_room, :viewport, %{
   name: :main_viewport,
-  size: {700, 600},
+  size: {800, 600},
   default_scene: {SharedRoom.Scene.Home, nil},
   drivers: [
     %{
