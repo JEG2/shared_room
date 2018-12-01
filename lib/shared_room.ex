@@ -45,7 +45,7 @@ defmodule SharedRoom do
 
   defp wait_for_connection do
     Process.sleep(100)
-    if is_pid(:global.whereis_name(SharedRoom.Room)) do
+    unless is_pid(:global.whereis_name(SharedRoom.Room)) do
       wait_for_connection()
     end
   end
