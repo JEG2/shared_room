@@ -28,6 +28,13 @@ defmodule SharedRoom.Room do
     name = String.to_atom("player_#{state.next_player}")
     location = starting_location(state.size, state.locations)
 
+    Enum.each(state.player_scenes, fn other_scene, other_name ->
+      Home.show_new_player(
+        scene,
+        other_name,
+        Map.fetch!(state.locations, other_scene)
+      )
+    end)
     new_player_scenes = Map.put(state.player_scenes, scene, name)
     show_new_player(new_player_scenes, name, location)
 
