@@ -26,6 +26,7 @@ defmodule SharedRoom do
   end
   defp children([address], main_viewport_config) do
     Node.connect(String.to_atom(address))
+    wait_for_connection()
     [
       scenic_child(main_viewport_config)
     ]
@@ -40,5 +41,12 @@ defmodule SharedRoom do
 
     # start the application with the viewport
     supervisor(Scenic, viewports: [main_viewport_config])
+  end
+
+  defp wait_for_connection do
+    Process.sleep(100)
+    if Node.list == [ ] do
+      wait_for_connection()
+    end
   end
 end
